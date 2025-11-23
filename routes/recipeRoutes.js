@@ -1,41 +1,68 @@
 const express = require('express');
-const Recipe = require('../models/recipe');
+const Recipe = require('../models/recipe'); // Assuming the model is called 'recipe'
 const router = express.Router();
 
-// Home route
+// Display all recipes on the homepage
 router.get('/', async (req, res) => {
-  const recipes = await Recipe.find();
-  res.render('home', { recipes });
+  try {
+    const recipes = await Recipe.find(); // Get all recipes
+    res.render('home', { recipes });     // Pass recipes to the home.ejs view
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error retrieving recipes');
+  }
 });
 
-// Create a new recipe
+// Render create recipe page (for new recipe)
 router.get('/create', (req, res) => {
-  res.render('create-recipe');
+  res.render('create-recipe', { recipe: null });
 });
 
-router.post('/create', async (req, res) => {
-  const { title, ingredients, instructions } = req.body;
-  const newRecipe = new Recipe({ title, ingredients, instructions });
-  await newRecipe.save();
-  res.redirect('/');
-});
-
-// Edit recipe
+// Render edit recipe page (for an existing recipe)
 router.get('/edit/:id', async (req, res) => {
-  const recipe = await Recipe.findById(req.params.id);
-  res.render('create-recipe', { recipe });
+  try {
+    const recipe = await Recipe.findById(req.params.id); // Find recipe by ID
+    res.render('create-recipe', { recipe: recipe }); // Pass recipe data to the view
+  } catch (err) {
+    console.log(err);
+    res.redirect('/'); // Handle the error (e.g., redirect to homepage)
+  }
 });
 
+// Handle create new recipe (POST request)
+router.post('/create', async (req, res) => {
+  try {
+    const { title, ingredients, instructions } = req.body;
+    const newRecipe = new Recipe({ title, ingredients, instructions });
+    await newRecipe.save();
+    res.redirect('/');  // After saving, redirect to homepage
+  } catch (err) {
+    console.log(err);
+    res.redirect('/create');
+  }
+});
+
+// Handle edit recipe (POST request)
 router.post('/edit/:id', async (req, res) => {
-  const { title, ingredients, instructions } = req.body;
-  await Recipe.findByIdAndUpdate(req.params.id, { title, ingredients, instructions });
-  res.redirect('/');
+  try {
+    const { title, ingredients, instructions } = req.body;
+    await Recipe.findByIdAndUpdate(req.params.id, { title, ingredients, instructions });
+    res.redirect('/'); // After updating, redirect to homepage
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
 });
 
-// Delete recipe
+// Handle delete recipe (POST request)
 router.post('/delete/:id', async (req, res) => {
-  await Recipe.findByIdAndDelete(req.params.id);
-  res.redirect('/');
+  try {
+    await Recipe.findByIdAndDelete(req.params.id);
+    res.redirect('/'); // After deleting, redirect to homepage
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
 });
 
 module.exports = router;

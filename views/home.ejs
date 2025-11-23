@@ -1,24 +1,25 @@
-<% include partials/header %>
+<%- include('partials/header') %>
 
-<div class="container mt-4">
-  <h1 class="mb-4">Recipe Sharing Site</h1>
-  <a href="/create" class="btn btn-primary mb-3">Create New Recipe</a>
-  <div class="list-group">
-    <% recipes.forEach(recipe => { %>
-      <div class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-          <h5><%= recipe.title %></h5>
-          <p><%= recipe.ingredients.substring(0, 100) %>...</p>
-        </div>
-        <div>
-          <a href="/edit/<%= recipe._id %>" class="btn btn-warning btn-sm">Edit</a>
-          <form action="/delete/<%= recipe._id %>" method="POST" style="display:inline;">
-            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-          </form>
-        </div>
-      </div>
-    <% }) %>
-  </div>
-</div>
+<h1>Recipe Sharing Site</h1>
 
-<% include partials/footer %>
+<!-- Button to create a new recipe -->
+<a href="/create" class="btn btn-primary mb-3">Create New Recipe</a>
+
+<!-- Display the list of recipes -->
+<ul>
+  <% recipes.forEach(recipe => { %>
+    <li class="list-group-item">
+      <h3><%= recipe.title %></h3>
+      <p><%= recipe.ingredients %></p>
+      <!-- Edit button -->
+      <a href="/edit/<%= recipe._id %>" class="btn btn-warning btn-sm">Edit</a>
+      
+      <!-- Delete form -->
+      <form action="/delete/<%= recipe._id %>" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include('partials/footer') %>
