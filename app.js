@@ -1,31 +1,30 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const recipeRoutes = require('./routes/recipeRoutes');
+const bodyParser = require('body-parser');
+const recipeRoutes = require('./routes/recipeRoutes'); // Import the routes
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// Set up EJS as the view engine
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
 
-// Connect to MongoDB
+// Middleware to parse request bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public')); // Serve static files (CSS, images, etc.)
+
+// MongoDB Connection
 mongoose.connect(process.env.DB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.log('Database connection error:', err);
-  });
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.log('Error connecting to MongoDB:', err));
 
-// Routes
-app.use('/', recipeRoutes);
+// Use the recipe routes
+app.use('/', recipeRoutes);  // Use all routes from recipeRoutes.js
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
