@@ -1,10 +1,10 @@
 <!-- views/create-recipe.ejs -->
 <!-- form to create recipe -->
 
-<<%- include('partials/header') %>
+<%- include('partials/header') %>
 
 <div class="container my-5">
-  <h1 class="text-center mb-4"><%= recipe ? 'Edit Recipe' : 'Create New Recipe' %></h1>
+  <h1 class="text-center mb-4">Create New Recipe</h1>
 
   <!-- Form for creating or editing a recipe -->
   <form action="<%= recipe ? '/edit/' + recipe._id : '/create' %>" method="POST">
@@ -35,7 +35,7 @@
     <!-- Submit Button -->
     <div class="text-center">
       <button type="submit" class="btn btn-primary btn-lg">
-        <%= recipe ? 'Update Recipe' : 'Create Recipe' %>
+        Create Recipe
       </button>
     </div>
   </form>
