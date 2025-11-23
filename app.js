@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const recipeRoutes = require('./routes/recipeRoutes'); // Import the routes
 
+// load environment variables from .env file
 dotenv.config();
 
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
 
-// Middleware to parse request bodies
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public')); // Serve static files (CSS, images, etc.)

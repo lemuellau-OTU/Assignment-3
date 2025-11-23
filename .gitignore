@@ -1,2 +1,5 @@
 # Ignore .env file (for security)
 .env
+
+# Ignore database configuration file (for security)
+/config/config.js
