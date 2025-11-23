@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 800px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer p {
+  font-size: 14px;
+  color: #666;
+}

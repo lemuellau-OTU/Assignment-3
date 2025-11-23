@@ -1,0 +1,12 @@
+<% include partials/header %>
+
+<div class="container mt-4">
+  <h1 class="mb-4"><%= recipe.title %></h1>
+  <h5>Ingredients</h5>
+  <p><%= recipe.ingredients %></p>
+  <h5>Instructions</h5>
+  <p><%= recipe.instructions %></p>
+  <a href="/" class="btn btn-secondary">Back to Recipes</a>
+</div>
+
+<% include partials/footer %>
