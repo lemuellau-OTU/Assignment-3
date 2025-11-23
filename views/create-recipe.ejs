@@ -3,13 +3,38 @@
 
 <%- include('partials/header') %>
 
-<h1><%= recipe ? 'Edit Recipe' : 'Create New Recipe' %></h1>
+<div class="container my-5">
+  <h1 class="text-center mb-4"><%= recipe ? 'Edit Recipe' : 'Create New Recipe' %></h1>
 
-<form action="<%= recipe ? '/edit/' + recipe._id : '/create' %>" method="POST">
-  <input type="text" name="title" value="<%= recipe ? recipe.title : '' %>" placeholder="Title" required>
-  <textarea name="ingredients" placeholder="Ingredients" required><%= recipe ? recipe.ingredients : '' %></textarea>
-  <textarea name="instructions" placeholder="Instructions" required><%= recipe ? recipe.instructions : '' %></textarea>
-  <button type="submit">Save</button>
-</form>
+  <!-- Form for creating or editing a recipe -->
+  <form action="<%= recipe ? '/edit/' + recipe._id : '/create' %>" method="POST">
+    <div class="row">
+      <!-- Title Input -->
+      <div class="col-md-6 mb-3">
+        <label for="title" class="form-label">Recipe Title</label>
+        <input type="text" id="title" name="title" class="form-control" value="<%= recipe ? recipe.title : '' %>" placeholder="Enter recipe title" required>
+      </div>
+
+      <!-- Ingredients Input -->
+      <div class="col-md-6 mb-3">
+        <label for="ingredients" class="form-label">Ingredients</label>
+        <textarea id="ingredients" name="ingredients" class="form-control" placeholder="Enter recipe ingredients" required><%= recipe ? recipe.ingredients : '' %></textarea>
+      </div>
+    </div>
+
+    <!-- Instructions Input -->
+    <div class="mb-3">
+      <label for="instructions" class="form-label">Instructions</label>
+      <textarea id="instructions" name="instructions" class="form-control" placeholder="Enter cooking instructions" required><%= recipe ? recipe.instructions : '' %></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg">
+        <%= recipe ? 'Update Recipe' : 'Create Recipe' %>
+      </button>
+    </div>
+  </form>
+</div>
 
 <%- include('partials/footer') %>

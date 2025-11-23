@@ -1,17 +1,61 @@
+/* General Styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  padding-top: 50px; 
 }
 
-.container {
-  max-width: 800px;
+/* Header Styling */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 600;
 }
 
-footer {
-  text-align: center;
-  margin-top: 50px;
+/* Buttons */
+.btn {
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
 }
 
-footer p {
-  font-size: 14px;
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.card-text {
+  font-size: 1rem;
   color: #666;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #fff;
 }
