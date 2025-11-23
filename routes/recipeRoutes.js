@@ -1,5 +1,5 @@
 const express = require('express');
-const Recipe = require('../models/recipe'); // Assuming the model is called 'recipe'
+const Recipe = require('../models/recipe'); // Import the Recipe model
 const router = express.Router();
 
 // Display all recipes on the homepage
@@ -13,12 +13,12 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Render create recipe page (for new recipe)
+// create recipe page (for new recipe)
 router.get('/create', (req, res) => {
   res.render('create-recipe', { recipe: null });
 });
 
-// Render edit recipe page (for an existing recipe)
+// edit recipe page (for an existing recipe)
 router.get('/edit/:id', async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id); // Find recipe by ID
@@ -29,7 +29,7 @@ router.get('/edit/:id', async (req, res) => {
   }
 });
 
-// Handle create new recipe (POST request)
+// create new recipe
 router.post('/create', async (req, res) => {
   try {
     const { title, ingredients, instructions } = req.body;
@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
-// Handle edit recipe (POST request)
+// edit recipe
 router.post('/edit/:id', async (req, res) => {
   try {
     const { title, ingredients, instructions } = req.body;
@@ -54,7 +54,7 @@ router.post('/edit/:id', async (req, res) => {
   }
 });
 
-// Handle delete recipe (POST request)
+// delete recipe
 router.post('/delete/:id', async (req, res) => {
   try {
     await Recipe.findByIdAndDelete(req.params.id);
