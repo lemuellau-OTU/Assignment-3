@@ -4,6 +4,7 @@
 <%- include('partials/header') %>
 
 <div class="container my-5">
+  <!-- Title -->
   <h1 class="text-center mb-4">All Recipes</h1>
 
   <!-- Button to go back to the homepage -->
@@ -13,16 +14,20 @@
 
   <!-- Recipe List -->
   <div class="row">
+    <!-- Loop through recipes and display each one in card -->
     <% recipes.forEach(recipe => { %>
       <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
           <div class="card-body">
+            <!-- Recipe Details -->
             <h5 class="card-title text-primary"><%= recipe.title %></h5>
             <p class="card-text"><%= recipe.ingredients %></p>
             <p class="card-text"><%= recipe.instructions %></p>
           </div>
+          <!-- Edit and Delete Buttons -->
           <div class="card-footer text-center">
             <a href="/edit/<%= recipe._id %>" class="btn btn-warning btn-sm">Edit</a>
+            <!-- Delete with confirmation -->
             <form action="/delete/<%= recipe._id %>" method="POST" style="display:inline;" onsubmit="return confirmDelete()">
               <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
@@ -33,6 +38,7 @@
   </div>
 </div>
 
+<!-- Confirmation Script for Deletion -->
 <script>
   function confirmDelete() {
     return confirm("Are you sure you want to delete this recipe?");

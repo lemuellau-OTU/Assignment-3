@@ -1,8 +1,11 @@
+// app.js
+
+// Imports
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-const recipeRoutes = require('./routes/recipeRoutes'); // Import the routes
+const recipeRoutes = require('./routes/recipeRoutes');
 
 // load environment variables from .env file
 dotenv.config();
@@ -25,6 +28,7 @@ mongoose.connect(process.env.DB_URI)
 // Use the recipe routes
 app.use('/', recipeRoutes);  // Use all routes from recipeRoutes.js
 
+// Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -1,8 +1,9 @@
 // routes/recipeRoutes.js
 // Routes for creating, editing, deleting, and displaying recipes
 
+// Imports
 const express = require('express');
-const Recipe = require('../models/recipe'); // Import the Recipe model
+const Recipe = require('../models/recipe'); 
 const router = express.Router();
 
 // Home route (render the homepage)
@@ -11,7 +12,6 @@ router.get('/', async (req, res) => {
     const recipes = await Recipe.find(); // Fetch all recipes from the database
     res.render('home', { recipes }); 
   } catch (err) {
-    console.log(err);
     res.status(500).send('Error retrieving recipes');
   }
 });
@@ -22,7 +22,6 @@ router.get('/all-recipes', async (req, res) => {
     const recipes = await Recipe.find(); // Fetch all recipes from the database
     res.render('all-recipes', { recipes }); 
   } catch (err) {
-    console.log(err);
     res.status(500).send('Error retrieving recipes');
   }
 });
@@ -34,11 +33,11 @@ router.get('/create', (req, res) => {
 router.post('/create', async (req, res) => {
   try {
     const { title, ingredients, instructions } = req.body;
+    // Create a new recipe
     const newRecipe = new Recipe({ title, ingredients, instructions });
-    await newRecipe.save();
+    await newRecipe.save(); // Save to database
     res.redirect('/all-recipes');  // Redirect to the All Recipes page after saving
   } catch (err) {
-    console.log(err);
     res.redirect('/create');  // In case of error, redirect to the create page
   }
 });
@@ -49,7 +48,6 @@ router.get('/edit/:id', async (req, res) => {
     const recipe = await Recipe.findById(req.params.id); // Find recipe by ID
     res.render('create-recipe', { recipe: recipe }); 
   } catch (err) {
-    console.log(err);
     res.redirect('/'); // Redirect to homepage on error
   }
 });
@@ -58,10 +56,10 @@ router.get('/edit/:id', async (req, res) => {
 router.post('/edit/:id', async (req, res) => {
   try {
     const { title, ingredients, instructions } = req.body;
+    // Update the recipe
     await Recipe.findByIdAndUpdate(req.params.id, { title, ingredients, instructions });
     res.redirect('/all-recipes'); // After updating, redirect to All Recipes page
   } catch (err) {
-    console.log(err);
     res.redirect('/all-recipes');
   }
 });
@@ -69,10 +67,10 @@ router.post('/edit/:id', async (req, res) => {
 // delete recipe
 router.post('/delete/:id', async (req, res) => {
   try {
+    // Delete the recipe
     await Recipe.findByIdAndDelete(req.params.id);
     res.redirect('/all-recipes'); // After updating, redirect to All Recipes page
   } catch (err) {
-    console.log(err);
     res.redirect('/all-recipes');
   }
 });
