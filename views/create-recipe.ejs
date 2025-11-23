@@ -9,23 +9,27 @@
   <!-- Form for creating or editing a recipe -->
   <form action="<%= recipe ? '/edit/' + recipe._id : '/create' %>" method="POST">
     <div class="row">
-      <!-- Title Input -->
-      <div class="col-md-6 mb-3">
+      <!-- Title Input (Stays at the top, centered) -->
+      <div class="col-md-12 mb-3">
         <label for="title" class="form-label">Recipe Title</label>
         <input type="text" id="title" name="title" class="form-control" value="<%= recipe ? recipe.title : '' %>" placeholder="Enter recipe title" required>
       </div>
+    </div>
 
-      <!-- Ingredients Input -->
-      <div class="col-md-6 mb-3">
+    <div class="row">
+      <!-- Ingredients Input (Full width, more space) -->
+      <div class="col-md-12 mb-3">
         <label for="ingredients" class="form-label">Ingredients</label>
-        <textarea id="ingredients" name="ingredients" class="form-control" placeholder="Enter recipe ingredients" required><%= recipe ? recipe.ingredients : '' %></textarea>
+        <textarea id="ingredients" name="ingredients" class="form-control" placeholder="Enter recipe ingredients" rows="6" required><%= recipe ? recipe.ingredients : '' %></textarea>
       </div>
     </div>
 
-    <!-- Instructions Input -->
-    <div class="mb-3">
-      <label for="instructions" class="form-label">Instructions</label>
-      <textarea id="instructions" name="instructions" class="form-control" placeholder="Enter cooking instructions" required><%= recipe ? recipe.instructions : '' %></textarea>
+    <div class="row">
+      <!-- Instructions Input (Full width, larger text area) -->
+      <div class="col-md-12 mb-3">
+        <label for="instructions" class="form-label">Instructions</label>
+        <textarea id="instructions" name="instructions" class="form-control" placeholder="Enter cooking instructions" rows="8" required><%= recipe ? recipe.instructions : '' %></textarea>
+      </div>
     </div>
 
     <!-- Submit Button -->
